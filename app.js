@@ -37,6 +37,22 @@ app.get('/blogs', (req, res)=>{
   })
 })
 
+app.get('/blogs/new', (req, res)=>{
+  res.render('new')
+})
+
+app.get('/blogs/:id', (req, res)=>{
+  Blog.findById(req.params.id, (err, foundBlog) => {
+    err ? res.redirect('/blogs') : res.render('show', {blog: foundBlog})
+  })
+})
+
+app.post('/blogs', (req, res)=>{
+  Blog.create(req.body.blog, (err, newBlog) => {
+    err ? res.render('new') : res.redirect('/blogs')
+  })
+})
+
 // ==============================================================
 //                           Start App
 // ==============================================================
