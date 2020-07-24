@@ -70,6 +70,14 @@ app.put('/blogs/:id', (req, res)=>{
   })
 })
 
+// DELETE ROUTES
+app.delete('/blogs/:id', (req, res)=>{
+  Blog.findByIdAndRemove(req.params.id, err => {
+    // ideally there should be better error handling
+    err ? res.redirect('/blogs') : res.redirect('/blogs')
+  })
+})
+
 // ==============================================================
 //                           Start App
 // ==============================================================
